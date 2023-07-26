@@ -27,13 +27,14 @@
 
 ## Graph Neural Networks 
 - The fundamental idea of gnns is to learn a neural network's suitable representation of graph data. This is also called representation learning.
-- Using all the information about the graph including the note features and the connections stored in an adjacency matrix the g n outputs new representations which are also called embeddings .
-- For each of the nodes these node embeddings contain the structural as well as the feature information of the other nodes in the graph. This means each node knows something about the other nodes e.g., the connection to these nodes and its context in the graph.
+- Using all the information about the graph including the node features and the connections stored in an adjacency matrix the gnn outputs representations which are also called embeddings .
+- For each of the nodes, these node embeddings contain the structural as well as the feature information of the other nodes in the graph. This means each node knows something about the other nodes e.g., the connection to these nodes and its context in the graph.
 - The embeddings can finally be used to perform predictions the way how you use them heavily depends on the machine learning problem you want to solve.
 - For instance if you want to perform node level predictions you would simply use the node embedding of a specific unlabeled node to obtain a prediction.
--  Let's assume this example:  graph has four labeled nodes and one unlabeled node which is white then you would simply use the embedding vector of this node and predict the nodes label with it if you want to perform graph level predictions.
-- However you would use all of the node embeddings, combine them in a certain way and get a representation of the whole graph.
--  Alternatively you can include pooling operations to iteratively compress the graph into a fixed size vector. This representation can then be used to run a prediction similar nodes , meaning nodes with similar features or in similar contexts will lead to similar node embeddings same way similar graphs will lead to similar graph embeddings.
+-  Let's assume this example:  graph has four labeled nodes and one unlabeled node which is white then you would simply use the embedding vector of this node and predict the nodes label with it
+-   If you want to perform graph level predictions however you would use all of the node embeddings, combine them in a certain way and get a representation of the whole graph.
+-  Alternatively you can include pooling operations to iteratively compress the graph into a fixed size vector. This representation can then be used to run a prediction.
+-  Similar nodes , meaning nodes with similar features or in similar contexts, will lead to similar node embeddings. The same way similar graphs will lead to similar graph embeddings.
 - Using a gnn the size of the node embeddings is a hyper parameter and can differ from the initial node feature size.
 - Let's assume the graph input is a molecule again and the atom feature vectors have a size of 50.Tthis means you have 50 properties such as the atom type or the number of protons available. - For each node then the embedding can for instance have a size of 128. However these embedding values cannot directly be interpreted as they are an artificial compound of the node and edge information within the graph.
 -  Finally edge features can also be processed in the gnn and will be combined into these node embeddings.

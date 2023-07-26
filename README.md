@@ -55,6 +55,9 @@
 ## Message Passing Layers
  - This is done by gathering the current node information of neighbor nodes, combining it in certain ways to get a new embedding and updating that node features or states with these embeddings. This approach is also called graph convolution and it can be seen as an extension of convolutions to graph data.
  - let's have a look at this visualization from a paper which shows image convolutions on the left and graph convolutions on the right.
+
+   ![Screenshot (325)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/0487ddc5-1c72-4a84-a163-dc3b57e3a408)
+
  - For images you simply slide learnable kernels over the regular grid structure of the pixels which extracts the most important information.
  - This can also be seen as combining the information in a local area by using all the pixels in this neighborhood.
  - For non-euclidean graph structures, this idea is extended as we simply use the information in a node's neighborhood and combine it into a new embedding vector.
@@ -67,6 +70,10 @@
  - Note how some of the feature information of the blue nodes enters the state of the yellow node. Now we update our annotations in the graph. This message passing is done by all nodes and therefore we have new embeddings for every node in our graph.
  - The size of these new embeddings is a hyper parameter and depends on the graph data you use.
  - As you can see the node with the number five only holds information about the blue node and itself because it's green and blue. Currently this node doesn't know about our yellow node with the number one but this will change.
+   
+![Screenshot (326)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/faff309a-b719-4613-98d7-2258c2688756)
+
+  
  - Let's perform another message passing step to see what happens and actually we can perform several of these message passing steps which corresponds to the number of layers in the gnn.
  - Again we use the current node embedding of our yellow node , collect the state messages of its neighbors and aggregate them in some way. If we update the yellow nodes embedding now we can see that some information about the green node passed into it.
  -  This means that node 1 knows something about node 5 but additionally in our example every single node in the graph knows something about all other nodes.
@@ -79,20 +86,30 @@
 - For a specific node if we restructure our graph like this we can automatically see which nodes are the direct neighbors of our yellow node. This means, in the first layer of our message passing gnn, the yellow node incorporates information about the blue nodes. Now if we add the direct neighbors for each of these nodes we can see the next layer.
 - Two of our blue nodes are connected to blue and yellow and the third blue node is connected to green. We can see that after two layers, the yellow node already contains the information about all nodes in the graph.
 - The number of layers in a gnn defines how many neighborhood hops we perform this number is a hyperparameter and depends on the graph data we use.
+
+![Screenshot (329)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/c044a899-efb3-4372-99e0-83d0fb4b9482)
+
 - If you have small graphs such as smaller molecules you can quickly learn all the information after only a few layers. The number of layers also depends on the learning task. Sometimes only a local area of the graph might be relevant for your predictions but stacking too many message passing layers in a gnn can also lead to a phenomenon called over smoothing.
 - As you see in our previous example, the node embeddings contain most of the information already after the second layer. Hence if you keep combining these states over many more layers you will not learn anything new but instead make all node states indistinguishable from each other.
 - There already exist methods such as paranorm which can handle these issues but for now let's assume we have no over smoothing in our gnn.
+  
+
+![Screenshot (330)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/447c7069-69a5-4df8-be9e-9e31847847f8)
 
 ## Formal Definition of GNNs
 - let's formulate the operations in the message passing layers more mathematically.
 - The state update for a node u is mainly performed using the two already introduced operations: aggregate and update aggregate uses the states of all direct neighbors v of a node u and aggregates them in a specific way.
 - Then the update operation uses the current state in time step k and combines it with the aggregated neighbor states. If we think of our previous example, our node u is the yellow node and its neighbors are the three blue nodes. We use their states in time step k and combine them with the yellow state to get a new embedding for the yellow node.
 
+![Screenshot (333)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/d5d75039-aad2-4d91-bbd7-dd80585f6049)
+
 ## Variants of GNNs
-- Note that the basic formul stays the same for all variants of message passing graph neural networks. The only thing in which they are different is how they perform the update and aggregate functions.
+- Note that the basic formula stays the same for all variants of message passing graph neural networks. The only thing in which they are different is how they perform the update and aggregate functions.
 -  Many different operations have already been published in literature and besides simple mean or max operations there are more advanced methods like recurrent neural networks.
 - Let's go over some examples. One of the first famous works uses two interesting ideas. First of all, they aggregate the neighbor information as a normalized sum of the states.Additionally, they incorporate the update operation into this aggregation by adding a self loop for a particular node including it into the summation.
 - This means update and aggregate are combined into one computation.
 - Another work uses multi-layer perceptrons so basically feed forward networks to perform the aggregate operation. This means that there are learnable weights which can be optimized for the best aggregation of the neighbor states.
 - Another popular paper applied the attention mechanism to gnns, this means that the importance of the features of the neighbor states is considered for the aggregation. As a result, the updated embedding contains more information about important neighbor features. Finally, gated graph neural networks use a recurrent unit to update the state iteratively over time.
 - Besides these introduced variants they exist many more in the literature but don't be scared they all just use different approaches for the aggregate and update function.
+  
+![Screenshot (335)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/38431b11-5561-4943-86c0-51dfd8398ef2)

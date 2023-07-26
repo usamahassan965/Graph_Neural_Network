@@ -4,6 +4,9 @@
 - Besides the adjacency matrix , there also exists another way of representation which is adjacency lists.
 - Further, the nodes can have node features and edges have their edge features.
 - To understand graph, let's assume graph is a molecule and nodes are atoms and edges are bond type.
+
+  ![Screenshot (318)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/5380e079-855e-4eeb-b71a-13f21a892c33)
+
   
 ## Applications of Graph Neural Networks
 1. Medicine or Pharmacy (related with molecular data)
@@ -11,6 +14,8 @@
 3. Social networks (facebook - people stand for nodes which are connected in certain relationship)
 4. 3D games (graph structure is also find in 3d games where objects are modeled as a polygon mesh)
 5. Machine Learning applications  (prediction of unlabelled nodes - Link prediction , Edge level predictions- whether there will be a connection between 2 nodes in a graph)
+
+![Screenshot (320)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/92e2af92-06b8-4a4f-843d-5aca529172c2)
 
 ## Motivation for GNNs
 - GNNs simply extend classical feed forward models . In the past, there were variety of other approaches to handle graphs such as hand crafted features as input for machine learning models.
@@ -24,6 +29,8 @@
 - Finally the structure of graphs is non-euclidean for images you have a clear grid that can be expressed by x and y coordinates.
 - Graphs are dynamic structures that may lay differently in the space and distance metrics such as the euclidean distance are not clearly defined.
 - For instance you cannot really say how close node a and b are of course you can add 3d coordinates but they do not incorporate the edge information between nodes this is also the reason why the machine learning area around graphs is called geometric deep learning .
+
+![Screenshot (321)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/9bf1cb8d-0577-4860-83b9-89e7dae0f993)
 
 ## Graph Neural Networks 
 - The fundamental idea of gnns is to learn a neural network's suitable representation of graph data. This is also called representation learning.
@@ -39,3 +46,5 @@
 - Let's assume the graph input is a molecule again and the atom feature vectors have a size of 50.Tthis means you have 50 properties such as the atom type or the number of protons available. - For each node then the embedding can for instance have a size of 128. However these embedding values cannot directly be interpreted as they are an artificial compound of the node and edge information within the graph.
 -  Finally edge features can also be processed in the gnn and will be combined into these node embeddings.
 - Within the graph neural network you have several so called message passing layers these are the core building blocks of gnns they are responsible for combining the node and edge information into the node embeddings.
+  
+![Screenshot (324)](https://github.com/usamahassan965/Graph_Neural_Network/assets/96824810/c1de4260-91c6-493b-ad18-66bb5258a91f)
